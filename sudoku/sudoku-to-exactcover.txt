@@ -1,0 +1,94 @@
+Converting sudoku to an exact cover problem
+===========================================
+
+What is a sudoku?
+-----------------
+
+A sudoku is puzzle consisting of a 9x9 grid of numbers that is partially filled in.
+The goal is to complete the grid by entering a single number in every empty cell such that:
+
+1) the numbers 1..9 all occur once in every row
+2) the numbers 1..9 all occur once in every column
+3) the numbers 1..9 all occur once in every box
+4) each cell contains precisely one number
+
+The regular sudoku puzzle uses a 9x9 grid, you can extend the puzzle in various ways, the most obvious
+one of which is different grid sizes such as 4x4, 6x6 (2x3 or 3x2 boxes), 12x12 (3x4 or 4x3 boxes),
+16x16 or even 25x25.
+
+This an example completed 4x4 sudoku grid:
+
+```
++--+--+
+|12|34|
+|34|21|
++--+--+
+|21|43|
+|43|12|
++--+--+
+```
+
+What does the matrix representing the exact cover instance look like?
+---------------------------------------------------------------------
+
+We will construct a matrix with which we can count all the 4x4 sudoku puzzles.  We use 4x4 because its size is
+much more manageable than the 324 by 729 beast that you need for the 9x9 puzzles.
+
+
+How many rows do we need?
+
+There are 4 * 4 cells in the sudoku puzzle, each of the cells can contain the numbers 1 through 4.
+This yields: 4 * 4 * 4 = 64.
+
+
+Columns
+
+There are 4 constraints that we have to encode:
+
+1) the numbers 1..4 all occur once in every row
+   There are 4 rows, and 4 numbers to place in any one row: 4 * 4 = 16 columns
+2) the numbers 1..n all occur once in every column
+   Analogous to 1): 16 columns
+3) the numbers 1..n all occur once in every box
+   Analogous to 1): 16 columns
+4) you can only place one number in each cell
+   There are 16 cells so.. 16 columns
+
+
+Matrix
+------
+
+The matrix below will give you an idea of what the full thing would look like.
+
+Legend:
+- box tl = top left box
+- box tr = top right box
+- box bl = bottom left box
+- box br = bottom right box
+- cell a through p = cells counting like this: r1c1, r1c2, ..., r4c4
+
+```
+       row     row     row     row     col     col     col     col     box     box     box     box
+       1       2       3       4       1       2       3       4       tl      tr      bl      br      cell
+   val 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 1 2 3 4 a b c d e f g h i j k l m n o p
+r1c1v1 1                               1                               1                               1
+    v2   1                               1                               1                             1
+    v3     1                               1                               1                           1
+    v4       1                               1                               1                         1
+  c2v1 1                                       1                       1                                 1
+    v2   1                                       1                       1                               1
+    v3     1                                       1                       1                             1
+    v4       1                                       1                       1                           1 
+  c3v1 1                                               1                       1                           1
+    v2   1                                               1                       1                         1
+    v3     1                                               1                       1                       1
+    v4       1                                               1                       1                     1
+  c4v1 1                                                       1               1                             1
+    v2   1                                                       1               1                           1
+    v3     1                                                       1               1                         1
+    v4       1                                                       1               1                       1
+r2c1v1         1 ...
+     .
+     .
+     .
+```
