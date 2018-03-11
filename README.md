@@ -119,7 +119,7 @@ In addition, the examples directory contains scripts to generate instances to Ex
 To solve the 8-queens problem you'd run this:
 ```shell
 $ cd examples
-$ ./n-queens/generate-n-queens-matrix.py 8 | ./count-solutions.py 
+$ ./generate-n-queens-matrix.py 8 | ./count-solutions.py
 92
 ```
 
