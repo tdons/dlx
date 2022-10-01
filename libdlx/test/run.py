@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import os
 import sys
@@ -51,8 +51,8 @@ with dlx_matrix(num_primary_columns, num_secondary_columns, num_nodes) as mat:
 			computed_solutions.add(frozenset(sol))
 
 if solutions != computed_solutions:
-	print 'got', computed_solutions
-	print 'expected', solutions
+	print('got ' + computed_solutions)
+	print('expected ' + solutions)
 	sys.exit(1)
 
 sys.exit(0)

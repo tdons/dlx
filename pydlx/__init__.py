@@ -14,7 +14,7 @@ def _get_libdlx_location():
 	_glob = os.path.join(cwd, '../build/lib/*dlx*')
 	matches = glob.glob(_glob)
 	if len(matches) != 1:
-		print "error: can't find libdlx, follow build-instructions.txt"
+		print("error: can't find libdlx, follow build-instructions.txt")
 		exit(1)
 	return matches[0]
 

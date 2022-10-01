@@ -19,7 +19,7 @@ class dlx_iterative_solver:
 		found_solution = _libdlx.dlx_iterative_solver_find_solution(self.__dlx_iterative_solver)
 		if not found_solution:
 			return False
-		return [self.get_row(r) for r in xrange(self.num_solution_rows())]
+		return [self.get_row(r) for r in range(self.num_solution_rows())]
 
 	def num_solution_rows(self):
 		return _libdlx.dlx_iterative_solver_num_solution_rows(self.__dlx_iterative_solver)
